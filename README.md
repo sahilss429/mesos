@@ -1,1 +1,1 @@
-# Nomad and consul work under progress.
+# mesos-marathon with consul
