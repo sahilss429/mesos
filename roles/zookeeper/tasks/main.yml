@@ -1,0 +1,31 @@
+---
+- name: installing mesos
+  apt:
+   name: mesos 
+   state: latest
+
+- name: installing marathon
+  apt:
+   name: marathon
+   state: latest
+  
+- name: Set ZooKeeper URL # used for leader election amongst masters
+  copy:
+   content: "{{zookeeper_url}}"
+   dest: /etc/mesos/zk
+
+- name: Create zookeeper myid file
+  template:
+   src: myid.j2
+   dest: /etc/zookeeper/conf/myid
+
+
+- name: Create configuration file
+  template:
+   src: 'zoo.cfg.j2'
+   dest: '/etc/zookeeper/conf/zoo.cfg'
+   
+- name: restart zookeeper
+  service:
+   name: zookeeper
+   state: restarted

@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+{% for host in play_hosts %}
+{% if 'ansible_eth0' in hostvars[host] %}
+{{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}  {{ inventory_hostname }}
+{% endif %}
+{% endfor %}
