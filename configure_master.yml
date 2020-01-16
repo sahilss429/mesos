@@ -1,5 +1,5 @@
-- name: Install and configure consul server
-  hosts: consul
+- name: Install and configure masters with consul
+  hosts: masters
   become: true
   user: ansible
   gather_facts: no
@@ -7,4 +7,7 @@
   vars_files:
    - group_vars/all
   roles:
+   - role: zookeeper
+   - role: mesos-master
+   - role: marathon
    - role: consul-server
